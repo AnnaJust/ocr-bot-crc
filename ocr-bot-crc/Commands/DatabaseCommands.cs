@@ -9,6 +9,7 @@ namespace ocr_bot.commands
     public class DatabaseCommands : BaseCommandModule
     {
         [Command("save-profile")]
+        [Description("Saves the user profile in database, a default language can be specified in the passed argument.")]
         public async Task SaveProfileCommand(CommandContext ctx, string language = "eng")
         {
             var DBEngine = new DBEngineService();
@@ -48,6 +49,7 @@ namespace ocr_bot.commands
         }
 
         [Command("my-profile")]
+        [Description("Displays saved user information.")]
         public async Task GetProfileCommand(CommandContext ctx)
         {
             var DBEngine = new DBEngineService();
@@ -80,6 +82,7 @@ namespace ocr_bot.commands
         }
 
         [Command("user-profile")]
+        [Description("Displays saved user information, the user name must be entered in the passed argument.")]
         public async Task GetProfileCommand(CommandContext ctx, string userName)
         {
             var DBEngine = new DBEngineService();
@@ -112,6 +115,7 @@ namespace ocr_bot.commands
         }
 
         [Command("set-language")]
+        [Description("Setting a default language for the user, the language must be entered in the passed argument.")]
         public async Task SetLanguageCommand(CommandContext ctx, string language)
         {
             var DBEngine = new DBEngineService();

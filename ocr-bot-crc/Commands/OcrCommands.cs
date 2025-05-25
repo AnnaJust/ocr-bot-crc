@@ -10,6 +10,7 @@ namespace ocr_bot.commands
     public class OcrCommands : BaseCommandModule
     {
         [Command("hello")]
+        [Description("Bot description.")]
         public async Task HelloCommand(CommandContext ctx)
         {
             var message = new DiscordEmbedBuilder
@@ -23,6 +24,7 @@ namespace ocr_bot.commands
         }
 
         [Command("ocr")]
+        [Description("Performs data extraction from the uploaded image.")]
         public async Task OcrCommand(CommandContext ctx, string language = "")
         {
             if (ctx.Message.Attachments.Count == 0)
@@ -112,6 +114,45 @@ namespace ocr_bot.commands
 
                 await ctx.Channel.SendMessageAsync(embed: message);
             }
+        }
+
+        [Command("help")]
+        [Description("Displays all available commands with a brief description.")]
+        public async Task HelpAsync(CommandContext ctx)
+        {
+            var cmds = ctx.CommandsNext.RegisteredCommands
+                         .OrderBy(kvp => kvp.Key)
+                         .Select(kvp => kvp.Value);
+
+            var embed = new DiscordEmbedBuilder
+            {
+                Title = "List of available commands.",
+                Color = DiscordColor.Azure
+            };
+
+            foreach (var cmd in cmds)
+            {
+                var args = cmd.Overloads
+                              .First()
+                              .Arguments
+                              .Select(a =>
+                              {
+                                  var name = a.IsOptional
+                                      ? $"[{a.Name}]"
+                                      : $"<{a.Name}>";
+                                  return name;
+                              });
+
+                var desc = cmd.Description ?? "No description.";
+
+                embed.AddField(
+                    name: $"!{cmd.Name} {string.Join(" ", args)}",
+                    value: desc,
+                    inline: false
+                );
+            }
+
+            await ctx.Channel.SendMessageAsync(embed: embed);
         }
     }
 }
