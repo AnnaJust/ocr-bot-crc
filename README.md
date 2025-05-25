@@ -5,7 +5,7 @@ A Discord bot built with .NET 9 and DSharpPlus that performs Optical Character R
 ## Features
 - **OCR Extraction**: Upload an image and receive extracted text.
 - **User Profiles**: Save, update, and retrieve user default language preferences.
-- **Help Command**: Dynamic listing of all available commands.
+- **Help Command**: Listing of all available commands.
 
 ## Commands
 
