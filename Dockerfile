@@ -10,8 +10,10 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+COPY ["ocr-bot-crc.sln", "./"]
 COPY ["ocr-bot-crc/ocr-bot-crc.csproj", "ocr-bot-crc/"]
-RUN dotnet restore "./ocr-bot-crc/ocr-bot-crc.csproj"
+COPY ["ocr-bot-crc.tests/ocr-bot-crc.tests.csproj", "ocr-bot-crc.tests/"]
+RUN dotnet restore "ocr-bot-crc.sln"
 COPY . .
 WORKDIR "/src/ocr-bot-crc"
 RUN dotnet build "./ocr-bot-crc.csproj" -c $BUILD_CONFIGURATION -o /app/build
