@@ -1,6 +1,6 @@
 # OCR Discord Bot
 
-A Discord bot built with .NET 9 and DSharpPlus that performs Optical Character Recognition (OCR) on images and manages user profiles in a PostgreSQL database.
+A Discord bot built with .NET 9 and DSharpPlus that performs Optical Character Recognition with OCR.Space API and manages user profiles in a PostgreSQL database.
 
 ## Features
 - **OCR Extraction**: Upload an image and receive extracted text.
