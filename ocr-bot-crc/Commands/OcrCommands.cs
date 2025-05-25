@@ -108,7 +108,6 @@ namespace ocr_bot.commands
                     Color = DiscordColor.DarkRed
                 };
 
-                Console.WriteLine(ex);
                 await ctx.Channel.SendMessageAsync(embed: message);
             }
         }

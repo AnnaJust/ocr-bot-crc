@@ -1,11 +1,5 @@
-﻿using DSharpPlus.Entities;
-using Npgsql;
+﻿using Npgsql;
 using ocr_bot_crc.Database.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ocr_bot_crc.Database.Services
 {

@@ -8,7 +8,7 @@ namespace ocr_bot.commands
 {
     public class DatabaseCommands : BaseCommandModule
     {
-        [Command("save")]
+        [Command("save-profile")]
         public async Task SaveProfileCommand(CommandContext ctx, string language = "eng")
         {
             var DBEngine = new DBEngineService();
@@ -25,15 +25,27 @@ namespace ocr_bot.commands
 
             if (isStored)
             {
-                await ctx.Channel.SendMessageAsync("Success");
+                var message = new DiscordEmbedBuilder
+                {
+                    Title = $"User: {databaseUser.UserName} successfully saved in the database.",
+                    Color = DiscordColor.Azure
+                };
+
+                await ctx.Channel.SendMessageAsync(embed: message);
             }
             else
             {
-                await ctx.Channel.SendMessageAsync("Wrong");
+                var message = new DiscordEmbedBuilder
+                {
+                    Title = $"An error occurred while saving user: {databaseUser.UserName} in the database.",
+                    Color = DiscordColor.DarkRed
+                };
+
+                await ctx.Channel.SendMessageAsync(embed: message);
             }
         }
 
-        [Command("profile")]
+        [Command("my-profile")]
         public async Task GetProfileCommand(CommandContext ctx)
         {
             var DBEngine = new DBEngineService();
@@ -54,7 +66,44 @@ namespace ocr_bot.commands
             }
             else
             {
-                await ctx.Channel.SendMessageAsync("Wrong");
+                var message = new DiscordEmbedBuilder
+                {
+                    Title = $"User: {ctx.User.Username} profile cannot be found in the database.",
+                    Color = DiscordColor.DarkRed
+                };
+
+                await ctx.Channel.SendMessageAsync(embed: message);
+            }
+        }
+
+        [Command("user-profile")]
+        public async Task GetProfileCommand(CommandContext ctx, string userName)
+        {
+            var DBEngine = new DBEngineService();
+
+            var userToFind = await DBEngine.GetUserAsync(userName, ctx.Guild.Id);
+
+            if (userToFind.Item1 == true)
+            {
+                var profileEmbed = new DiscordEmbedBuilder
+                {
+                    Color = DiscordColor.Azure,
+                    Title = $"{userToFind.Item2.UserName}'s Profile",
+                    Description = $"Server Name: {userToFind.Item2.ServerName} \n" +
+                                  $"Default language: {userToFind.Item2.DefaultLanguage}"
+                };
+
+                await ctx.Channel.SendMessageAsync(embed: profileEmbed);
+            }
+            else
+            {
+                var message = new DiscordEmbedBuilder
+                {
+                    Title = $"User: {ctx.User.Username} profile cannot be found in the database.",
+                    Color = DiscordColor.DarkRed
+                };
+
+                await ctx.Channel.SendMessageAsync(embed: message);
             }
         }
 
@@ -75,11 +124,23 @@ namespace ocr_bot.commands
 
             if (isStored)
             {
-                await ctx.Channel.SendMessageAsync("Success");
+                var message = new DiscordEmbedBuilder
+                {
+                    Title = $"Default language changed to {language} for user {databaseUser.UserName}",
+                    Color = DiscordColor.Azure
+                };
+
+                await ctx.Channel.SendMessageAsync(embed: message);
             }
             else
             {
-                await ctx.Channel.SendMessageAsync("Wrong");
+                var message = new DiscordEmbedBuilder
+                {
+                    Title = $"An error occurred when changing the default language for user {databaseUser.UserName}",
+                    Color = DiscordColor.DarkRed
+                };
+
+                await ctx.Channel.SendMessageAsync(embed: message);
             }
         }
     }
