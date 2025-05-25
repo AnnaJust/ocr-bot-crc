@@ -27,7 +27,8 @@ namespace ocr_bot.commands
             {
                 var message = new DiscordEmbedBuilder
                 {
-                    Title = $"User: {databaseUser.UserName} successfully saved in the database.",
+                    Title = "Success",
+                    Description = $"User: {databaseUser.UserName} successfully saved in the database.",
                     Color = DiscordColor.Azure
                 };
 
@@ -37,7 +38,8 @@ namespace ocr_bot.commands
             {
                 var message = new DiscordEmbedBuilder
                 {
-                    Title = $"An error occurred while saving user: {databaseUser.UserName} in the database.",
+                    Title = "Error",
+                    Description = $"An error occurred while saving user: {databaseUser.UserName} in the database.",
                     Color = DiscordColor.DarkRed
                 };
 
@@ -68,7 +70,8 @@ namespace ocr_bot.commands
             {
                 var message = new DiscordEmbedBuilder
                 {
-                    Title = $"User: {ctx.User.Username} profile cannot be found in the database.",
+                    Title = "Error",
+                    Description = $"User: {ctx.User.Username} profile cannot be found in the database.",
                     Color = DiscordColor.DarkRed
                 };
 
@@ -99,7 +102,8 @@ namespace ocr_bot.commands
             {
                 var message = new DiscordEmbedBuilder
                 {
-                    Title = $"User: {ctx.User.Username} profile cannot be found in the database.",
+                    Title = "Error",
+                    Description = $"User: {userName} profile cannot be found in the database.",
                     Color = DiscordColor.DarkRed
                 };
 
@@ -107,8 +111,8 @@ namespace ocr_bot.commands
             }
         }
 
-        [Command("language")]
-        public async Task ChangeLanguageCommand(CommandContext ctx, string language)
+        [Command("set-language")]
+        public async Task SetLanguageCommand(CommandContext ctx, string language)
         {
             var DBEngine = new DBEngineService();
 
@@ -126,7 +130,8 @@ namespace ocr_bot.commands
             {
                 var message = new DiscordEmbedBuilder
                 {
-                    Title = $"Default language changed to {language} for user {databaseUser.UserName}",
+                    Title = "Success",
+                    Description = $"Default language changed to {language} for user {databaseUser.UserName}",
                     Color = DiscordColor.Azure
                 };
 
@@ -136,7 +141,8 @@ namespace ocr_bot.commands
             {
                 var message = new DiscordEmbedBuilder
                 {
-                    Title = $"An error occurred when changing the default language for user {databaseUser.UserName}",
+                    Title = "Error",
+                    Description = $"An error occurred when changing the default language for user {databaseUser.UserName}",
                     Color = DiscordColor.DarkRed
                 };
 

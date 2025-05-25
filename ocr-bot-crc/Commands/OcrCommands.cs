@@ -82,7 +82,8 @@ namespace ocr_bot.commands
                 {
                     var message = new DiscordEmbedBuilder
                     {
-                        Title = "Text not recognised",
+                        Title = "Error",
+                        Description = "Text not recognised",
                         Color = DiscordColor.DarkRed
                     };
 
@@ -104,7 +105,8 @@ namespace ocr_bot.commands
             {
                 var message = new DiscordEmbedBuilder
                 {
-                    Title = "Text not recognised",
+                    Title = "Error",
+                    Description = "Text not recognised",
                     Color = DiscordColor.DarkRed
                 };
 
