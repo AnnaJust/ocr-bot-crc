@@ -51,9 +51,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Echo operation
-        run: echo "Operation: ${{ github.event.inputs.operation }}"
-
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
