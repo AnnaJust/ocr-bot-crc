@@ -7,9 +7,6 @@ A Discord bot built with .NET 9 and DSharpPlus that performs Optical Character R
 - **User Profiles**: Save, update, and retrieve user default language preferences.
 - **Help Command**: Dynamic listing of all available commands.
 
-## Usage
-Once the bot is running, use the configured prefix (!) to invoke commands in your Discord server.
-
 ## Commands
 
 | Command                    | Description                                                      |
