@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ocr-bot-crc": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
